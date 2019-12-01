@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscountCalculator {
 
-	double percent=.01;
+	private final double percent=.01;
 	public double getDiscount(Double amount,int discPercentage)
 	{
 		double discount=amount*(discPercentage*percent);

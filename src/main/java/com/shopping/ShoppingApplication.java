@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.shopping.business.BillingAmountCalculator;
 import com.shopping.business.DiscountContext;
+import static com.shopping.constant.ShoppingEnum.*;
 import com.shopping.discount.impl.Slab1DiscountCalculator;
 import com.shopping.discount.impl.Slab2DiscountCalculator;
 import com.shopping.discount.impl.Slab3DiscountCalculator;
@@ -45,11 +46,11 @@ public class ShoppingApplication {
 		System.out.println("Enter Purchase Amount");
 		double amount=sc.nextDouble();
 		
-		if(amount<=5000)
+		if(amount<=FIVE_THOUSAND.getValue())
 		{
 			discountContext.setDiscountStrategy(slab1DiscountCalculator);			
 		}
-		else if(amount>5000 && amount<=10000)
+		else if(amount<=TEN_THOUSAND.getValue())
 		{
 			discountContext.setDiscountStrategy(slab2DiscountCalculator);
 		}
@@ -60,7 +61,7 @@ public class ShoppingApplication {
 		
 		double discount=discountContext.calculateDiscount(amount);
 		
-		System.out.println("discount Amount-->"+discount);
+		System.out.println("Discount Amount-->"+discount);
 		
 		double billAmount=billingAmountCalculator.prepareBill(amount,discount);
 		
