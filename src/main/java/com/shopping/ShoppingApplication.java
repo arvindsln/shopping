@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,6 +22,8 @@ import com.shopping.discount.impl.Slab3DiscountCalculator;
 @SpringBootApplication
 public class ShoppingApplication {
 		
+	private static final Logger logger = LoggerFactory.getLogger(ShoppingApplication.class);
+	
 	@Autowired
 	DiscountContext discountContext;
 	
@@ -43,7 +47,7 @@ public class ShoppingApplication {
 	public void init()
 	{
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter Purchase Amount");
+		logger.info("Enter Purchase Amount");
 		double amount=sc.nextDouble();
 		
 		if(amount<=FIVE_THOUSAND.getValue())
@@ -61,11 +65,11 @@ public class ShoppingApplication {
 		
 		double discount=discountContext.calculateDiscount(amount);
 		
-		System.out.println("Discount Amount-->"+discount);
+		logger.info("Discount Amount-->"+discount);
 		
 		double billAmount=billingAmountCalculator.prepareBill(amount,discount);
 		
-		System.out.println("Billed Amount-->"+billAmount);
+		logger.info("Billed Amount-->"+billAmount);
 	}
 
 }
